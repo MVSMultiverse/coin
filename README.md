@@ -4,7 +4,7 @@ MVS: A Decentralized Currency in Multiverse(https://mvscoin.org)
 
 ## Info
 
-- TotalSupply 200B.
+- TotalSupply 20B.
 
 - Tokenomics 25% Liquidity / 75% Mining.
 
@@ -15,7 +15,7 @@ MVS: A Decentralized Currency in Multiverse(https://mvscoin.org)
 ## Contract Information
 
 - name: Multiverse
-- totalSupply: 200B
+- totalSupply: 20B
 - decimals: 18
 - symbol: MVS
 
