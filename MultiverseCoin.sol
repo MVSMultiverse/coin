@@ -669,6 +669,7 @@ contract ERC20 is Context, IERC20, Ownable {
    */
   function transfer(address recipient, uint256 amount)
     public
+    virtual
     override
     returns (bool)
   {
@@ -720,7 +721,7 @@ contract ERC20 is Context, IERC20, Ownable {
     address sender,
     address recipient,
     uint256 amount
-  ) public override returns (bool) {
+  ) public virtual override returns (bool) {
     _transfer(sender, recipient, amount);
     _approve(
       sender,
@@ -919,6 +920,28 @@ contract MultiverseCoin is ERC20('Multiverse', 'MVS') {
     uint256 previousBalance,
     uint256 newBalance
   );
+
+  /// @notice Override ERC20.transfer
+  function transfer(address recipient, uint256 amount)
+    public
+    override
+    returns (bool)
+  {
+    super.transfer(recipient, amount);
+    _moveDelegates(_delegates[msg.sender], _delegates[recipient], amount);
+    return true;
+  }
+
+  /// @notice Override ERC20.transferFrom
+  function transferFrom(
+    address sender,
+    address recipient,
+    uint256 amount
+  ) public override returns (bool) {
+    super.transferFrom(sender, recipient, amount);
+    _moveDelegates(_delegates[sender], _delegates[recipient], amount);
+    return true;
+  }
 
   /**
    * @notice Delegate votes from `msg.sender` to `delegatee`
